@@ -1,0 +1,34 @@
+version: '3.9'
+
+networks:
+  codesamurai:
+
+services:
+  codesamurai.api:
+    image: codesamuraiapi
+    build:
+      context: .
+      dockerfile: CodeSamurai.API/Dockerfile
+    ports:
+       - "8000:80"
+       - "5001:443"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+;http://+
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=helloworld
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/CodeSamurai.API.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    depends_on :
+      - codesamurai.db
+    networks :
+      - codesamurai
+
+  codesamurai.db:
+    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    container_name: sql_server2022
+    environment:
+        - ACCEPT_EULA=Y
+        - MSSQL_SA_PASSWORD=myStong_Password123#
+    networks :
+      - codesamurai
