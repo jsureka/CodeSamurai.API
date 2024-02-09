@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Core\Framework\Extensions\" />
-    <Folder Include="Profiles\" />
   </ItemGroup>
 
 </Project>

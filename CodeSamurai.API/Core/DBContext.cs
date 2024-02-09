@@ -9,7 +9,7 @@ namespace CodeSamurai.API.Core
 {
     public class DBContext : DbContext
     {
-        public DbSet<Book> Books { get; set; } = null!;
+        public DbSet<User> Books { get; set; } = null!;
 
         public DBContext(DbContextOptions<DBContext> options) : base(options) {
             try

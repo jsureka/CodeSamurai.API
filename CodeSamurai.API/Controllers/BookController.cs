@@ -18,7 +18,7 @@ namespace CodeSamurai.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBookAsync(Book book)
+        public async Task<IActionResult> AddBookAsync(User book)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace CodeSamurai.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBookAsync(int id, Book updatedBook)
+        public async Task<IActionResult> UpdateBookAsync(int id, User updatedBook)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace CodeSamurai.API.Controllers
                 {
                     return NotFound();
                 }
-                var responseModel = new ResponseListModel<Book>
+                var responseModel = new ResponseListModel<User>
                 {
                     Data = books.ToList(),
                 };

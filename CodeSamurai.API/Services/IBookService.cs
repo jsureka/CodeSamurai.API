@@ -6,10 +6,10 @@ namespace CodeSamurai.API.Services
 {
     public interface IBookService
     {
-        Task<Book> AddBookAsync(Book book);
-        Task<Book> UpdateBookAsync(int id, Book updatedBook);
-        Task<IEnumerable<Book>> GetAllBooksAsync();
-        Task<Book> GetBookByIdAsync(int id);
-        Task<IEnumerable<Book>> SearchBooksAsync(QueryParameters queryParams);
+        Task<User> AddBookAsync(User book);
+        Task<User> UpdateBookAsync(int id, User updatedBook);
+        Task<IEnumerable<User>> GetAllBooksAsync();
+        Task<User> GetBookByIdAsync(int id);
+        Task<IEnumerable<User>> SearchBooksAsync(QueryParameters queryParams);
     }
 }

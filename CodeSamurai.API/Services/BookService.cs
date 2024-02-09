@@ -6,20 +6,20 @@ namespace CodeSamurai.API.Services
 {
     public class BookService : IBookService
     {
-        private readonly IGenericRepository<Book> _bookRepository;
+        private readonly IGenericRepository<User> _bookRepository;
 
-        public BookService(IGenericRepository<Book> bookRepository)
+        public BookService(IGenericRepository<User> bookRepository)
         {
             _bookRepository = bookRepository;
         }
 
-        public async Task<Book> AddBookAsync(Book book)
+        public async Task<User> AddBookAsync(User book)
         {
             await _bookRepository.Add(book);
             return book;
         }
 
-        public async Task<Book> UpdateBookAsync(int id, Book updatedBook)
+        public async Task<User> UpdateBookAsync(int id, User updatedBook)
         {
             var existingBook = await _bookRepository.GetById(id);
             if (existingBook != null)
@@ -34,17 +34,17 @@ namespace CodeSamurai.API.Services
             return null; // Book not found
         }
 
-        public async Task<IEnumerable<Book>> GetAllBooksAsync()
+        public async Task<IEnumerable<User>> GetAllBooksAsync()
         {
             return await _bookRepository.GetAll();
         }
 
-        public async Task<Book> GetBookByIdAsync(int id)
+        public async Task<User> GetBookByIdAsync(int id)
         {
             return await _bookRepository.GetById(id);
         }
 
-        public async Task<IEnumerable<Book>> SearchBooksAsync(QueryParameters queryParams)
+        public async Task<IEnumerable<User>> SearchBooksAsync(QueryParameters queryParams)
         {
             var query = _bookRepository.Queryable();
             if (!string.IsNullOrEmpty(queryParams.Title))
