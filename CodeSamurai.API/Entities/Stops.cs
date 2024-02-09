@@ -13,5 +13,8 @@ namespace CodeSamurai.API.Entities
         public string? DepartureTime { get; set; }
 
         public int Fare { get; set; }
+
+        [ForeignKey("Train")]
+        public int TrainId { get; set; }
     }
 }

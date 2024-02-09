@@ -10,6 +10,10 @@ namespace CodeSamurai.API.Core
     public class DBContext : DbContext
     {
         public DbSet<User> Books { get; set; } = null!;
+        public DbSet<Train> Trains { get; set; } = null!;
+        public DbSet<Station> Stations { get; set; } = null!;
+        public DbSet<Stops> Stops { get; set; } = null!;
+        public DbSet<User> Users { get; set; } = null!;
 
         public DBContext(DbContextOptions<DBContext> options) : base(options) {
             try

@@ -8,6 +8,6 @@ namespace CodeSamurai.API.Entities
 
         public int Capacity { get; set; }
 
-        public IList<Stops> Stops { get; set; }
+        public IList<Stops>? Stops { get; set; }
     }
 }

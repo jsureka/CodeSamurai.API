@@ -7,15 +7,13 @@ namespace CodeSamurai.API.Services
     public class UserService : IUserService
     {
         private readonly IGenericRepository<User> _repository;
-        private readonly IMapper _mapper;
 
-        public UserService(IGenericRepository<User> repository, IMapper mapper)
+        public UserService(IGenericRepository<User> repository)
         {
             _repository = repository;
-            _mapper = mapper;
         }
 
-        public Task<User> AddUserAsync(User book)
+        public Task<User> AddUserAsync(User user)
         {
             throw new NotImplementedException();
         }
@@ -35,7 +33,7 @@ namespace CodeSamurai.API.Services
             throw new NotImplementedException();
         }
 
-        public Task<User> UpdateUserAsync(int id, User updatedBook)
+        public Task<User> UpdateUserAsync(int id, User updatedUser)
         {
             throw new NotImplementedException();
         }
