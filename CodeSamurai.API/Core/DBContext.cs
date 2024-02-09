@@ -1,15 +1,12 @@
 ﻿using CodeSamurai.API.Entities;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
-using Nest;
 
 namespace CodeSamurai.API.Core
 {
     public class DBContext : DbContext
-    {
-        public DbSet<User> Books { get; set; } = null!;
+    {        
         public DbSet<Train> Trains { get; set; } = null!;
         public DbSet<Station> Stations { get; set; } = null!;
         public DbSet<Stops> Stops { get; set; } = null!;
@@ -39,6 +36,6 @@ namespace CodeSamurai.API.Core
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-        }
+                 }
     }
 }

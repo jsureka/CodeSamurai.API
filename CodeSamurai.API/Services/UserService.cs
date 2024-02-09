@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CodeSamurai.API.Entities;
 using CodeSamurai.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeSamurai.API.Services
 {
@@ -13,19 +14,20 @@ namespace CodeSamurai.API.Services
             _repository = repository;
         }
 
-        public Task<User> AddUserAsync(User user)
+        public void AddUserAsync(User user)
         {
-            throw new NotImplementedException();
+            _repository.Add(user);
         }
 
-        public Task<IEnumerable<User>> GetAllUsersAsync()
+        public async Task<IEnumerable<User>> GetAllUsersAsync()
         {
-            throw new NotImplementedException();
+            return await _repository.GetAll();
         }
 
-        public Task<User> GetUserByIdAsync(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _repository.Queryable().FirstOrDefaultAsync(u => u.User_id == id);
+
         }
 
         public Task<IEnumerable<User>> SearchUsersAsync(QueryParameters queryParams)
@@ -33,9 +35,15 @@ namespace CodeSamurai.API.Services
             throw new NotImplementedException();
         }
 
-        public Task<User> UpdateUserAsync(int id, User updatedUser)
+        public async void UpdateUserAsync(int id, User updatedUser)
         {
-            throw new NotImplementedException();
+            var user = await _repository.GetById(id);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+            updatedUser.Id = id;
+            await _repository.Update(updatedUser);
         }
     }
 }

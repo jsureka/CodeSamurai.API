@@ -7,7 +7,6 @@ namespace CodeSamurai.API.Profiles
         public AutoMapperConfig()
         {
             CreateMap<Entities.User, Models.UserModel>().ReverseMap();
-            CreateMap<Entities.Book, Models.BookModel>().ReverseMap();
             CreateMap<Entities.Station, Models.StationModel>().ReverseMap();
             CreateMap<Entities.Train, Models.TrainModel>().ReverseMap();
         }

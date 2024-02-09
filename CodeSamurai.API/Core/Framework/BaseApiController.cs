@@ -9,13 +9,8 @@ namespace CodeSamurai.API.Core.Framework
     {
         protected IActionResult Ok<T>(T baseModel, string message = null, bool showDefaultMessageIfEmpty = false) where T : class
         {
-            var model = new ResponseModel<T>();
-            model.Data = baseModel;
-            if (showDefaultMessageIfEmpty && string.IsNullOrWhiteSpace(message))
-                message = "Ok";
-            model.Message = message;
 
-            return base.Ok(model);
+            return base.Ok(baseModel);
         }
 
 
@@ -25,7 +20,6 @@ namespace CodeSamurai.API.Core.Framework
             model.Data = baseModel;
             if (showDefaultMessageIfEmpty && string.IsNullOrWhiteSpace(message))
                 message = "Ok";
-            model.Message = message;
 
             return base.Ok(model);
         }
@@ -36,19 +30,12 @@ namespace CodeSamurai.API.Core.Framework
             if (showDefaultMessageIfEmpty && string.IsNullOrWhiteSpace(message))
                 message = "Ok";
 
-            model.Message = message;
-
             return base.Ok(model);
         }
 
-        protected IActionResult Created(string id, string message = null, bool showDefaultMessageIfEmpty = true)
+        protected IActionResult Created<T>(T baseModel, string message = null, bool showDefaultMessageIfEmpty = true) where T : class
         {
-            var model = new ResponseModel<string>();
-            model.Data = id;
-            if (showDefaultMessageIfEmpty && string.IsNullOrWhiteSpace(message))
-                message = "Created";
-            model.Message = message;
-            return base.StatusCode(StatusCodes.Status201Created, model);
+            return base.StatusCode(StatusCodes.Status201Created, baseModel);
         }
 
         protected IActionResult BadRequest<T>(T baseModel, bool showDefaultMessageIfEmpty = true) where T : class

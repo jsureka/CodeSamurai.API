@@ -18,85 +18,29 @@ namespace CodeSamurai.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser(User User)
+        public IActionResult AddUser(UserModel userModel)
         {
+            var user = new User
+            {
+                Name = userModel.User_name,
+                Balance = userModel.Balance,
+                User_id = userModel.User_id
+            };
             try
             {
-                var addedUser = await _userService.AddUserAsync(User);
-                return Created(nameof(addedUser));
+                _userService.AddUserAsync(user);
+                var addedUser = new UserModel
+                {
+                    User_id = user.User_id,
+                    User_name = user.Name,
+                    Balance = user.Balance
+                };
+
+                return Created(addedUser);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, User updatedUser)
-        {
-            try
-            {
-                var User = await _userService.UpdateUserAsync(id, updatedUser);
-                return Ok(User);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            try
-            {
-                var users = await _userService.GetAllUsersAsync();
-                return Ok(users);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-        }
-
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
-        {
-            try
-            {
-                var user = await _userService.GetUserByIdAsync(id);
-                if (user == null)
-                {
-                    return NotFound();
-                }
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
-            }
-        }
-
-        [HttpGet("search")]
-        public async Task<IActionResult> SearchUsersAsync([FromQuery] QueryParameters queryParameters)
-        {
-            try
-            {
-                var Users = await _userService.SearchUsersAsync(queryParameters);
-                if (Users == null)
-                {
-                    return NotFound();
-                }
-                var responseModel = new ResponseListModel<User>
-                {
-                    Data = Users.ToList(),
-                };
-
-                return Ok(responseModel);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, ex.Message);
             }
         }
     }

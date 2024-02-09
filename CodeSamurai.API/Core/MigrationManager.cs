@@ -16,8 +16,12 @@ namespace CodeSamurai.API.Core
                         foreach (var entityType in appContext.Model.GetEntityTypes())
                         {
                             var tableName = entityType.GetTableName();
-                            var sqlCommand = $"DELETE FROM {tableName}";
-                            appContext.Database.ExecuteSqlRaw(sqlCommand);
+                            if (!string.IsNullOrEmpty(tableName))
+                            {
+                                var sqlCommand = $"DELETE FROM {tableName}";
+                                appContext.Database.ExecuteSqlRaw(sqlCommand);
+                            }
+
                         }
                     }
                     catch (Exception ex)
