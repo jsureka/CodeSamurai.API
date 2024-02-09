@@ -1,9 +1,9 @@
 ﻿namespace CodeSamurai.API.Core.Framework
 {
     [Serializable]
-    public class PagedList<T> : List<T>, IPagedList<T>
+    public class IEnnumerable<T> : List<T>, IPagedList<T>
     {
-        public PagedList(IList<T> source, int pageIndex, int pageSize, int? totalCount = null)
+        public IEnnumerable(IList<T> source, int pageIndex, int pageSize, int? totalCount = null)
         {
             pageSize = Math.Max(pageSize, 1);
 

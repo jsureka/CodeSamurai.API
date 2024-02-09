@@ -1,4 +1,6 @@
-﻿using CodeSamurai.API.Entities;
+﻿using CodeSamurai.API.Core.Framework;
+using CodeSamurai.API.Entities;
+using CodeSamurai.API.Models;
 using CodeSamurai.API.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -80,16 +82,21 @@ namespace CodeSamurai.API.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> SearchBooksAsync([FromQuery] string searchTerm)
+        public async Task<IActionResult> SearchBooksAsync([FromQuery] QueryParameters queryParameters)
         {
             try
             {
-                var books = await _bookService.SearchBooksAsync(searchTerm);
+                var books = await _bookService.SearchBooksAsync(queryParameters);
                 if (books == null)
                 {
                     return NotFound();
                 }
-                return Ok(books);
+                var responseModel = new ResponseListModel<Book>
+                {
+                    Data = books.ToList(),
+                };
+
+                return Ok(responseModel);
             }
             catch (Exception ex)
             {

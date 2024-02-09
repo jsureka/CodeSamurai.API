@@ -11,12 +11,9 @@ services:
       dockerfile: CodeSamurai.API/Dockerfile
     ports:
        - "8000:80"
-       - "5001:443"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+;http://+
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=helloworld
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/CodeSamurai.API.pfx
+      - ASPNETCORE_URLS=http://+
     volumes:
       - ~/.aspnet/https:/https:ro
     depends_on :

@@ -1,7 +1,6 @@
-﻿using CodeSamurai.API.Core.Domains;
-using CodeSamurai.API.Entities;
-using MongoDB.Bson;
-using MongoDB.Driver;
+﻿using CodeSamurai.API.Entities;
+using CodeSamurai.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeSamurai.API.Services
 {
@@ -45,12 +44,23 @@ namespace CodeSamurai.API.Services
             return await _bookRepository.GetById(id);
         }
 
-        public async Task<IEnumerable<Book>> SearchBooksAsync(string searchTerm)
+        public async Task<IEnumerable<Book>> SearchBooksAsync(QueryParameters queryParams)
         {
-            // Implement search logic based on the searchTerm
-            // For example:
-            // return await _bookRepository.SearchBooks(searchTerm);
-            return null;
+            var query = _bookRepository.Queryable();
+            if (!string.IsNullOrEmpty(queryParams.Title))
+            {
+                query = query.Where(b => b.Title.Contains(queryParams.Title));
+            }
+            if (!string.IsNullOrEmpty(queryParams.Author))
+            {
+                query = query.Where(b => b.Author.Contains(queryParams.Author));
+            }
+            if (!string.IsNullOrEmpty(queryParams.Genre))
+            {
+                query = query.Where(b => b.Genre.Contains(queryParams.Genre));
+            }
+
+            return await query.ToListAsync();
         }
     }
 }

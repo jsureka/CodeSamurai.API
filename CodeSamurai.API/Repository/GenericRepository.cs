@@ -41,5 +41,10 @@ namespace CodeSamurai.API.Repository
             _dbSet.Update(entity);
             await _dbContext.SaveChangesAsync();
         }
+
+        public IQueryable<T> Queryable()
+        {
+            return _dbSet.AsQueryable();
+        }
     }
 }
