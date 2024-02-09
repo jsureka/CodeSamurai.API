@@ -4,6 +4,9 @@ USER root
 WORKDIR /app
 EXPOSE 80
 
+ENV MyConfig__Id='29a125a1-4556-4a68-8ce9-69e8b7e57f13'
+ENV MyConfig__Location='from Dockerfile'
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 USER root
 ARG BUILD_CONFIGURATION=Release

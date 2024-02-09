@@ -2,8 +2,6 @@ using CodeSamurai.API.Core;
 using CodeSamurai.API.Repository;
 using CodeSamurai.API.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Host.UseSerilog((context, configuration) =>
     configuration.ReadFrom.Configuration(context.Configuration));
+
+builder.Services.Configure<MyConfig>(builder.Configuration.GetSection("MyConfig"));
+builder.Configuration.AddUserSecrets<MyConfig>();
 
 builder.Services.AddDbContext<DBContext>(options =>
 {
